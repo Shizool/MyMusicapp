@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">MyMusic app</string>
+    <string name="app_preview">MyMusic app - Preview</string>
+    <string name="app_lyr">MyMusic app - Lyrics</string>
+
+    <string name="lyr_intro"> </string>
+    <string name="lyr_everybody"> </string>
+    <string name="lyr_rockstar"> </string>
+    <string name="lyr_narcos"> </string>
+    <string name="lyr_havana" > </string>
+    <string name="lyr_dont"> </string>
+    <string name="lyr_fadeaway"> </string>
+    <string name="lyr_thunder"> </string>
+    <string name="lyr_shapeofyou"> </string>
+    <string name="lyr_sweater"> </string>
+    <string name="lyr_bemine"> </string>
+    <string name="lyr_ciao"> </string>
+    <string name="lyr_closer"> </string>
+    <string name="lyr_human"> </string>
+    <string name="lyr_withoutme"> </string>
+</resources>
