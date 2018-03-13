@@ -6,6 +6,7 @@ public class Song {
     private String mAuthor;
     private int mImageId;
     private String mLyrics;
+    private Boolean isSelected = false;
 
     public Song (String songTitle, String author, int ImageId)
     {
@@ -41,4 +42,11 @@ public class Song {
     {
         return mLyrics;
     }
+
+    public void setIsSelected (boolean select)
+    {
+        this.isSelected = select;
+    }
+
+    public boolean getIsSelected() { return isSelected; }
 }

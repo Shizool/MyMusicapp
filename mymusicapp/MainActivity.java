@@ -16,7 +16,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    View tmpView = null;
+    boolean songFlag = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,44 +41,76 @@ public class MainActivity extends AppCompatActivity {
         songs.add(new Song("Human", "Rag'n'Bone Man", R.drawable.human));
         songs.add(new Song("Without me", "Eminem", R.drawable.withoutme));
 
-        SongAdapter adapter = new SongAdapter(this, songs);
+        final SongAdapter adapter = new SongAdapter(this, songs);
 
         final ListView listView = (ListView) findViewById(R.id.list);
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                TextView t = (TextView) view.findViewById(R.id.title);
-                TextView a = (TextView) view.findViewById(R.id.author);
-                t.setTextColor(getResources().getColor(R.color.colorAccent));
-                a.setTextColor(getResources().getColor(R.color.colorAccent));
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l)
+            {
 
-                if(tmpView != null && tmpView != view) {
-                    t = (TextView) tmpView.findViewById(R.id.title);
-                    a = (TextView) tmpView.findViewById(R.id.author);
-                    t.setTextColor(getResources().getColor(R.color.white));
-                    a.setTextColor(getResources().getColor(R.color.white));
+                for(int x = 0; x < songs.size(); x++)
+                {
+                    songs.get(x).setIsSelected(false);
                 }
 
-                tmpView = view;
+                songs.get(i).setIsSelected(true);
+                adapter.notifyDataSetChanged();
+
+                songFlag = true;
+                songPlaying();
+
+                final String pTitle = songs.get(i).getSongTitle();
+                final String pAuthor = songs.get(i).getAuthor();
+                final int pImage = songs.get(i).getImageId();
+
+                ImageView goPreview = (ImageView) findViewById(R.id.arrowPreview);
+                goPreview.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view)
+                    {
+                        Intent i = new Intent(MainActivity.this, PreviewActivity.class);
+                        i.putExtra("TITLE", pTitle);
+                        i.putExtra("AUTHOR", pAuthor);
+                        i.putExtra("IMAGE", pImage);
+                        startActivity(i);
+                    }} );
+
+
+
+                ImageView goLyrics = (ImageView) view.findViewById(R.id.lyrics);
+                goLyrics.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view)
+                    {
+                        Intent i = new Intent(MainActivity.this, LyricsActivity.class);
+                        startActivity(i);
+                    }} );
             }
         });
 
-/*
-        ImageView goPreview = (ImageView) findViewById(R.id.arrowPreview);
-        goPreview.setOnClickListener(new View.OnClickListener() {
+        final ImageView playPause = (ImageView) findViewById(R.id.play_pause);
+        playPause.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view)
             {
-
-
-                Intent i = new Intent(MainActivity.this, PreviewActivity.class);
-                i.putExtra("songArray", );
-                startActivity(i);
+                if(songFlag)
+                    songFlag=false;
+                else
+                    songFlag=true;
+               songPlaying();
             }} );
-*/
 
+    }
 
+    public void songPlaying()
+    {
+        ImageView v = findViewById(R.id.play_pause);
+        if(songFlag)
+            v.setImageResource(R.drawable.pause);
+        else
+            v.setImageResource(R.drawable.play);
     }
 }

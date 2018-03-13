@@ -23,11 +23,14 @@
         android:layout_width="match_parent"
         android:orientation="horizontal"
         android:layout_height="50dp"
-        android:padding="@dimen/standard_margin"
+        android:paddingLeft="@dimen/standard_margin"
+        android:paddingRight="@dimen/standard_margin"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
         android:background="@color/colorSecondary">
 
         <ImageView
-            android:layout_width="wrap_content"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:src="@drawable/up_arrow"
             android:id="@+id/arrowPreview"/>
@@ -35,11 +38,12 @@
         <SeekBar
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:layout_weight="1"
             android:id="@+id/progress"/>
 
         <ImageView
-            android:layout_width="wrap_content"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:src="@drawable/play"
             android:id="@+id/play-pause"/>
